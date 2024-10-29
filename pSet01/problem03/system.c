@@ -8,8 +8,11 @@ double dxgxy(double x, double y);
 double dyfxy(double x, double y);
 double dygxy(double x, double y);
 
+double ix(double x);
+double iy(double y);
+
 // The maximum number of loops to be executed (for testing)
-const int nmax = 1000;
+const int nmax = 15;
 
 // Defining an acceptable error at which to stop the root search
 const double error = 1.0e-6;
@@ -61,6 +64,43 @@ int main(void) {
             "Finding this root with an error of %.14lf took %i iterations.\n",
             fabs(change), count);
     }
+    // Expanding the code to include an iterative approach for root finding.
+    printf("==========================================\n");
+    printf("Iterative Method \n");
+    printf("==========================================\n");
+
+    double xIter[4] = {2, -2, 1, -1};
+    double yIter[4] = {1, -1, 2, -2};
+    for (int i = 0; i < 4; i++) {
+        // Initializing the change with each loop and the loop counter;
+        double change = 1;
+        int count = 0;
+
+        double x1 = xIter[i];
+        double y1 = yIter[i];
+
+        double y2;
+        double x2;
+
+        while (!(fabs(change) < error || fxy(x1, y1) == gxy(x1, y1) ||
+                 count >= nmax)) {
+            count++;
+
+            x2 = ix(x1);
+            y2 = iy(y1);
+
+            change = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+
+            x1 = x2;
+            y1 = y2;
+        }
+        printf("This function has root %i at x = %.8lf, y = %.8lf\n", i + 1, x2,
+               y2);
+        printf(
+            "Finding this root with an error of %.14lf took %i "
+            "iterations.\n",
+            fabs(change), count);
+    }
 }
 
 // Defining the given functions
@@ -72,3 +112,7 @@ double dxfxy(double x, double y) { return y; }
 double dxgxy(double x, double y) { return 2 * x; }
 double dyfxy(double x, double y) { return x; }
 double dygxy(double x, double y) { return 6 * y; }
+
+// Defining the iterative functions
+double ix(double x) { return sqrt(2 - (0.03 / pow(x, 2))); }
+double iy(double y) { return sqrt((2 - (0.01 / pow(y, 2))) / 3); }

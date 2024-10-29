@@ -40,7 +40,7 @@
 For problem 3 we are given a system of two equations as follows: 
 \begin{align*}
 	f \rb*{x,y} & =  x y  - 0.1 ,&\\
-	g \rb*{ x, y } & = x^{2}  3 y^{2} - 2 .&\\
+	g \rb*{ x, y } & = x^{2}+ 3 y^{2} - 2 .&\\
 \end{align*}
 
 \begin{enumerate}
@@ -66,7 +66,7 @@ Calculating the needed partial derivatives yields:
 
 These substitutions were then defined as seperate equations in code and the general Newton Method was implemented. 
 
-Looking at a graph of the differential equations, we know that there are four roots. 
+Looking at a graph of the equations, we know that there are four roots. 
 
 Four different starting positions were thus chosen:
 \begin{align*}
@@ -83,7 +83,51 @@ This in turn yielded four roots with less than six iterations needed to find eac
 	r_{4} & =  \rb*{-0.12293990, -0.81340555} &\\
 \end{align*}
 
-Given the careful input and debugging, the program very quickly found the roots. Some conditions that may impeded the program's ability to find the root include picking poor starting locations, not picking enough starting locations, and picking a location that may cause one of the imput functions to diverge. 
+Given the careful input and debugging, the program very quickly found the roots. Some conditions that may impeded the program's ability to find the root include picking poor starting locations, not picking enough starting locations, and picking a location that may cause one of the functions to diverge. 
+
+\item 
+	Our initial equations have the form 
+\begin{align*}
+	f \rb*{x,y} & =  x y  - 0.1  = 0 ,&\\
+	g \rb*{ x, y } & = x^{2}   + 3 y^{2} - 2  = 0 .&\\
+\end{align*}
+In order to implement an iterative method of finding the roots, we will firs rearrange the equations to find x in terms of x: 
+\begin{align*}
+	f \Rightarrow y & =  \frac{0.1}{x} &\\
+\end{align*}
+Substituting this into \(g\rb*{x,y,}\) yields
+\begin{align*}
+	x ^{2} + 3 \rb*{\frac{0.1}{x}}^{2} -2 & =  0 &\\
+	\Rightarrow x^{2} + \frac{0.03}{x^{2}} & =  2 &\\
+\end{align*}
+which can then finally be reformed to 
+\begin{align*}
+	x & =  \sqrt{2 - \frac{0.03}{x^{2}}}, &\\
+	\Rightarrow x_{n+1} & =  \sqrt{2 - \frac{0.03}{x_{n}^{2}}} &\\
+\end{align*}
+yielding a formula that can be used iteratively. Similarly, one can derive an iterative formula for \(y\).
+\begin{align*}
+	f \Rightarrow x & =  \frac{0.1}{y} &\\
+	g \Rightarrow \rb*{\frac{0.1}{y}}^{2} + 3 y^{2} -  2 & =  0 &\\
+	\Rightarrow 3 y^{2} & =  2 - \frac{0.01}{y^{2}} &\\
+	\Rightarrow y & =  \sqrt{\frac{2 - \frac{0.01}{y^{2}}}{3}} &\\
+	\Rightarrow y_{n+1} & =  \sqrt{\frac{2 - \frac{0.01}{y_{n}^{2}}}{3}} &\\
+\end{align*}
+After implementing this iterative approach in software and choosing the following initial values
+\begin{align*}
+	x_{0,1} & =  \rb*{2,1 } &\\
+	x_{0,2} & =  \rb*{-2,-1 } &\\
+	x_{0,3} & =  \rb*{1,2 } &\\
+	x_{0,4} & =  \rb*{-1,-2 }, &\\
+\end{align*}
+one sees that all four starting positions converge on the same values of 
+\begin{align*}
+	r & = (1.40885975, 0.81340555)&\\
+\end{align*}
+after four iterations. The relative performance of this method is about the same as for the calculation of the roots using the generalized Newton Method above (which took four to five iterations for the same error size). 
+
+Due to the implementation of the iterative method, all of the calculated answers will be positive. If one consider both the positive and negative roots, then one could more correctly obtain all of the roots for the problem, though the final calcualted values will only depend on the magnitudes of the initial values since they are squared in the iterative steps. 
+
 
 \end{enumerate}
 

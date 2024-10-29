@@ -37,6 +37,55 @@
 \centerline{ \Large{ \textbf{ Numerical Methods in Physics and Astrophysics }}}
 \centerline{ \Large{ \textbf{ Problem Set 1; Problem 3 }}}
 
-		
+For problem 3 we are given a system of two equations as follows: 
+\begin{align*}
+	f \rb*{x,y} & =  x y  - 0.1 ,&\\
+	g \rb*{ x, y } & = x^{2}  3 y^{2} - 2 .&\\
+\end{align*}
+
+\begin{enumerate}
+	\item 
+In order to solve this system of equations numerically we will employ the generalized Newton's method for a system of two equations: 
+
+\begin{align*}
+	x_{n+1} & =  x_{n} - \rb*{ \frac{f \cdot g_{y} - g \cdot f_{y}}{
+			f_{x} \cdot g_{y} - g_{x} \cdot f_{y}
+	}}_{n} &\\
+	y_{n+1} & =  y_{n} - 
+	\rb*{\frac{g \cdot f_{x} - f \cdot g_{x}}{
+			f_{x} \cdot g_{y} - g_{x} \cdot f_{y}
+	}}_{n} &\\
+\end{align*}
+Calculating the needed partial derivatives yields: 
+\begin{align*}
+	f_{x} & =  y &\\
+	f_{y} & =  x &\\
+	g_{x} & =  2 x &\\
+	g_{y} & =  6 y &\\
+\end{align*}
+
+These substitutions were then defined as seperate equations in code and the general Newton Method was implemented. 
+
+Looking at a graph of the differential equations, we know that there are four roots. 
+
+Four different starting positions were thus chosen:
+\begin{align*}
+	x_{0,1} & =  (-1,0) &\\
+	x_{0,2} & =  (0 , 1) &\\
+	x_{0,3} & =  (1, 0) &\\
+	x_{0,4} & =  (0 , -1) &\\
+\end{align*}
+This in turn yielded four roots with less than six iterations needed to find each root with an error of less than \(10^{-6}\). 
+\begin{align*}
+	r_{1} & =  \rb*{-1.40885974, -0.07097939} &\\
+	r_{2} & =  \rb*{0.12293990, 0.81340555} &\\
+	r_{3} & =  \rb*{1.40885974, 0.07097939} &\\
+	r_{4} & =  \rb*{-0.12293990, -0.81340555} &\\
+\end{align*}
+
+Given the careful input and debugging, the program very quickly found the roots. Some conditions that may impeded the program's ability to find the root include picking poor starting locations, not picking enough starting locations, and picking a location that may cause one of the imput functions to diverge. 
+
+\end{enumerate}
+
 
 \end{document}

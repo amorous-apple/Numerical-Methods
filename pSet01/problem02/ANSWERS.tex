@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+
+\usepackage{breqn}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,enumitem}
+\usepackage[german,spanish,english]{babel}
+\usepackage{tensor}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\newenvironment{ex}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{sol}[1][Solution]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1:}]}{\end{trivlist}}
+
+\newcommand{\meq}{\overset{!}{=}}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\brk[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+\DeclareSIUnit\angstrom{\text {Å}}
+
+%DECLARATION OF DELIMITERS%
+
+\DeclarePairedDelimiter\vb{\lvert}{\rvert}
+\DeclarePairedDelimiter\rb{(}{)}
+\DeclarePairedDelimiter\sqrb{[}{]}
+\DeclarePairedDelimiter\cb{\{}{\}}
+\DeclarePairedDelimiter\ab{\langle}{\rangle}
+\DeclarePairedDelimiter\db{\|}{\|}
+
+
+\begin{document}
+\noindent Richard Abele \hfill \today \\[30pt]
+\centerline{ \Large{ \textbf{ Numerical Methods in Physics and Astrophysics }}} 
+\centerline{ \Large{ \textbf{ Problem Set 1; Problem 2}}}
+
+We are given a differential equation of the form
+\begin{align*}
+	y'' + \lambda^{2} y & =  0. &\\
+\end{align*}
+
+In order to find the Eigenvalues of the given equation, we will first solve it analytically as suggested. 
+
+A general solution to this type of differential equation is give by 
+\begin{align*}
+	y\rb*{x} & =  A \cos \rb*{\lambda x} + B \sin \rb*{\lambda x} &\\  
+\end{align*}
+with \(A,B \in \mathbb{R}\) and determined by the boundary conditions. 
+
+The given boundary conditions are 
+\begin{enumerate}[label=(\alph*)]
+	\item \(y\rb*{0} = 0\)
+	\item and \(y\rb*{1} = y' \rb*{1}\).
+\end{enumerate}
+
+From boundary condition \(\rb*{a}\) it follows that:
+\begin{align*}
+	y \rb*{0} & =  A \cos \rb*{ 0 } + B \sin \rb*{ 0} = A  = 0&\\  
+	\Rightarrow y\rb*{x} & =  B \sin \rb*{ \lambda x} &\\ 
+	\Rightarrow y' \rb*{x} & =  B \lambda \cos \rb*{ \lambda x} &\\ 
+\end{align*}
+We can now apply the second boundary condition as follows:
+\begin{align*}
+	y \rb*{1} & =  B \sin\rb*{\lambda} &\\ 
+	y' \rb*{1} & =  B \lambda \cos \rb*{ \lambda} &\\
+	\Rightarrow B \sin \rb*{ \lambda} & =  B \lambda \cos \rb*{\lambda} &\\  
+	\Rightarrow \sin \rb*{ \lambda} & =  \lambda \cos \rb*{ \lambda} &\\  
+\end{align*}
+This equation can then be rearranged and solved using the Newton Method from Problem 1 (see parent directory). 
+\begin{align*}
+	\lambda \cos \rb*{ \lambda} - \sin \rb*{ \lambda} & =  0 &\\  
+\end{align*}
+
+Looking at a plot of the function in mathematica confirms that it is an oscillating odd function with infinite solutions. 
+
+The first non-zero solution yielded with seven iterations of the newton method is
+\begin{align*}
+	x_{n} & =  4.493409 &\\
+\end{align*}
+
+
+
+\end{document}

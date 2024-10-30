@@ -31,7 +31,7 @@ const double p2_y = 2;
 
 int main(void) {
     // Opening a file to write the calculated data
-    FILE *file = fopen("fractal_data.csv", "a");
+    FILE *file = fopen("calc_data.csv", "a");
     if (file == NULL) {
         printf("File not found!\n");
         return 1;
@@ -69,11 +69,11 @@ int main(void) {
             //     y, creal(z), cimag(z), creal(fofz), cimag(fofz), count,
             //     change);
 
-            fprintf(file, "%.15lf %.15lf %.15lf\n", x, y, cimag(z));
+            fprintf(file,
+                    "x: %f, y: %f, k(z): %.12lf + %.12lfi, f(z): %.12lf + "
+                    "%.12lfi, log10(count): %lf\n",
+                    x, y, creal(z), cimag(z), creal(fofz), cimag(fofz), count);
         }
-        // Printing a new line every time x changes to correct formatting for
-        // gnuplot
-        fprintf(file, "\n");
     }
 }
 // Defining the given function

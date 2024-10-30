@@ -1,5 +1,6 @@
 #include <complex.h>
 #include <math.h>
+#include <omp.h>
 #include <stdio.h>
 
 typedef struct {
@@ -19,8 +20,8 @@ const int nmax = 200;
 const double error = 1.0e-9;
 
 // Defining the image width and height (in pixels)
-const int img_width = 400;
-const int img_height = 400;
+const int img_width = 4000;
+const int img_height = 4000;
 
 // Defining the plotting range by choosing two points to define a rectangle
 // (pick the bottom left and top right points as p1 and p2 respectively)
@@ -50,7 +51,10 @@ int main(void) {
     // Iterating through every pixel in the image using x and y coordinates to
     // represent real and imaginary numbers in the complex plane.
     for (double x = xstart; x <= xend; x += xstep) {
-        for (double y = ystart; y <= yend; y += ystep) {
+#pragma omp parallel for
+        for (int j = 0; j < img_height; j++) {
+            double y = ystart + j * ystep;
+
             // Declaring the starting position for the algorithm
             double complex zstart = x + y * I;
 

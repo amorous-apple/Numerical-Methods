@@ -14,14 +14,14 @@ double complex dfz(double complex z);
 Results solve_cnewton(double complex z);
 
 // The maximum number of loops to be executed
-const int nmax = 200;
+const int nmax = 400;
 
 // Defining an acceptable error at which to stop the root search
 const double error = 1.0e-9;
 
 // Defining the image width and height (in pixels)
-const int img_width = 4000;
-const int img_height = 4000;
+const int img_width = 400;
+const int img_height = 400;
 
 // Defining the plotting range by choosing two points to define a rectangle
 // (pick the bottom left and top right points as p1 and p2 respectively)

@@ -1,4 +1,4 @@
-set terminal pngcairo size 1000,1000
+set terminal pngcairo size 400,400
 set output 'fractal_plot-01_04.png'
 set pm3d map
 set datafile separator " "

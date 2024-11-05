@@ -39,9 +39,10 @@
 
 To fulfill the necessary requirements for the assignment, the root finding program from the previous problem set is adapted to work with complex numbers and find the roots of a complex function. Two loops are then created to iterate what will be the pixels of a fractal image. 
 
-An initial program called \texttt{calc_data.c} is then created to log the requested data in a \texttt{.csv} file. This data is in a nicely readable format, showing \(x_{0}, y_{0}, k\rb*{z}, f\rb*{z}\), and \(\log_{10}\rb*{n}_{\text{iterations} }\) as noted in the assignment. In order to create the final fractal images though, it is more practical to create a file listing only the necessary parameters and no additional strings, hence the creation of a slightly modified program called \texttt{fractal.c}.
+A program called \texttt{calc_fractal} is created after running \texttt{make} in the project directory. Running \texttt{./calc_fractal} uses the values in \texttt{lib/constants.c} to generate the desired data in \texttt{data/fractal_data.csv} in the format \(x_{0},y_{0},  \Re k\rb*{z}, \Im k \rb*{z}, \Re f \rb*{z}, \Im f \rb*{z}\), and \(\log_{10}\rb*{n}\) with \(n\) being the number of iterations needed (set to 0 for no iterations). 
 
-Fractals were then plotted with gnuplot, using the \texttt{.gp} files. Images in the form of png follow the format \texttt{fractal_plot-<equation ID>_<image version>} where the equation IDs are used to group the equations. 
+Fractals were then plotted with \texttt{gnuplot} using the \texttt{.gp} file in \texttt{plots/}. Images of he fractals can be found in the same \texttt{plots/} directoy with the formal \texttt{fractal_plot_<ID>_<Img Vers>} with the ID corresponding to an equation and the second parameter the image version. 
+
 
 
 

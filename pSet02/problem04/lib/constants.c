@@ -10,8 +10,8 @@ const int nmax = 200;
 const double error = 1.0e-9;
 
 // Defining the image width and height (in pixels)
-const int img_width = 400;
-const int img_height = 400;
+const int img_width = 700;
+const int img_height = 700;
 
 // Defining the plotting range by choosing two points to define a rectangle
 // (pick the bottom left and top right points as p1 and p2 respectively)

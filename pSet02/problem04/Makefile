@@ -1,5 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -lm -fopenmp
+CFLAGS = -Wall -Wextra -fopenmp
+LDFLAGS = -lm -fopenmp
 
 # Define the executable name and build directory
 EXEC = calc_fractal
@@ -11,7 +12,7 @@ OBJ = $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC))
 
 # Default rule to create the executable
 $(EXEC): $(OBJ)
-	@$(CC) $(CFLAGS) -o $(EXEC) $(OBJ)
+	@$(CC) $(OBJ) -o $(EXEC) $(LDFLAGS)
 
 # Rule to compile each .c file into the corresponding .o file in the build directory
 $(BUILD_DIR)/%.o: %.c

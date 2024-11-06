@@ -6,5 +6,6 @@
 #include "fOfZ.h"
 
 Results solve_cnewton(double complex z);
+Datavals def_data(double complex zstart);
 
 #endif

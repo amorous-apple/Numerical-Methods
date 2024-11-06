@@ -3,12 +3,8 @@
 
 #include <complex.h>
 #include <math.h>
-
-typedef struct {
-    double complex root;
-    double complex change;
-    int count;
-} Results;
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct {
 	double xstart;
@@ -22,10 +18,27 @@ typedef struct {
 	double ystep;
 	int xStepCount;
 	int yStepCount;
+
+	int MAX_LINE_SIZE;
+	int MAX_BUFFER_SIZE;
 } Parameters;
 
+typedef struct {
+    double complex root;
+    double complex change;
+    int count;
+} Results;
+
+typedef struct {
+    double realZ;
+    double imagZ;
+    double realFofz;
+    double imagFofz;
+    double count;
+} Datavals;
+
 extern Parameters params;
-Parameters def_params(void);
+Parameters def_params(int argc, char* argv[]);
 
 extern const char* filename;
 
@@ -40,17 +53,4 @@ extern const double p1_y;
 extern const double p2_x;
 extern const double p2_y;
 
-// extern double rangex;
-// extern double rangey;
-//
-// extern double xstart;
-// extern double xend;
-// extern double ystart;
-// extern double yend;
-//
-// extern double xstep;
-// extern double ystep;
-// extern int xStepCount;
-// extern int yStepCount;
-//
 #endif

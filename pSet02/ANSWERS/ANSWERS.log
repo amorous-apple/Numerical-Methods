@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.9.26)  5 NOV 2024 14:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.9.26)  6 NOV 2024 01:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -481,42 +481,94 @@ Package translations Info: loading dictionary `translations-basic-dictionary' fo
 File: translations-basic-dictionary-german.trsl (german translation file `translations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' for `german'. on input line 35.
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 42.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 55.
  (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 55.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 55.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+esint on input line 42.
+LaTeX Font Info:    Trying to load font information for U+esint on input line 55.
  (/usr/share/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] (./ANSWERS.aux)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+<./../problem04/plots/fractal_plot-02_01.png, id=13, 702.625pt x 702.625pt>
+File: ./../problem04/plots/fractal_plot-02_01.png Graphic file (type png)
+<use ./../problem04/plots/fractal_plot-02_01.png>
+Package pdftex.def Info: ./../problem04/plots/fractal_plot-02_01.png  used on input line 78.
+(pdftex.def)             Requested size: 352.31625pt x 352.33014pt.
+<./../problem04/plots/fractal_plot-02_02.png, id=14, 702.625pt x 702.625pt>
+File: ./../problem04/plots/fractal_plot-02_02.png Graphic file (type png)
+<use ./../problem04/plots/fractal_plot-02_02.png>
+Package pdftex.def Info: ./../problem04/plots/fractal_plot-02_02.png  used on input line 89.
+(pdftex.def)             Requested size: 352.31625pt x 352.33014pt.
+<./../problem04/plots/fractal_plot-02_03.png, id=15, 702.625pt x 702.625pt>
+File: ./../problem04/plots/fractal_plot-02_03.png Graphic file (type png)
+<use ./../problem04/plots/fractal_plot-02_03.png>
+Package pdftex.def Info: ./../problem04/plots/fractal_plot-02_03.png  used on input line 95.
+(pdftex.def)             Requested size: 352.31625pt x 352.33014pt.
+<./../problem04/plots/fractal_plot-02_05_iter.png, id=16, 702.625pt x 702.625pt>
+File: ./../problem04/plots/fractal_plot-02_05_iter.png Graphic file (type png)
+<use ./../problem04/plots/fractal_plot-02_05_iter.png>
+Package pdftex.def Info: ./../problem04/plots/fractal_plot-02_05_iter.png  used on input line 103.
+(pdftex.def)             Requested size: 352.31625pt x 352.33014pt.
+<./../problem04/plots/fractal_plot-02_04_iter.png, id=17, 702.625pt x 702.625pt>
+File: ./../problem04/plots/fractal_plot-02_04_iter.png Graphic file (type png)
+<use ./../problem04/plots/fractal_plot-02_04_iter.png>
+Package pdftex.def Info: ./../problem04/plots/fractal_plot-02_04_iter.png  used on input line 108.
+(pdftex.def)             Requested size: 352.31625pt x 352.33014pt.
+<./../problem04/plots/fractal_plot-02_06_iter.png, id=18, 702.625pt x 702.625pt>
+File: ./../problem04/plots/fractal_plot-02_06_iter.png Graphic file (type png)
+<use ./../problem04/plots/fractal_plot-02_06_iter.png>
+Package pdftex.def Info: ./../problem04/plots/fractal_plot-02_06_iter.png  used on input line 113.
+(pdftex.def)             Requested size: 352.31625pt x 352.33014pt.
+ [2 <./../problem04/plots/fractal_plot-02_01.png>]
+<./../problem04/plots/fractal_plot-03_01.png, id=23, 702.625pt x 702.625pt>
+File: ./../problem04/plots/fractal_plot-03_01.png Graphic file (type png)
+<use ./../problem04/plots/fractal_plot-03_01.png>
+Package pdftex.def Info: ./../problem04/plots/fractal_plot-03_01.png  used on input line 131.
+(pdftex.def)             Requested size: 352.31625pt x 352.33014pt.
+<./../problem04/plots/fractal_plot-03_02.png, id=24, 702.625pt x 702.625pt>
+File: ./../problem04/plots/fractal_plot-03_02.png Graphic file (type png)
+<use ./../problem04/plots/fractal_plot-03_02.png>
+Package pdftex.def Info: ./../problem04/plots/fractal_plot-03_02.png  used on input line 136.
+(pdftex.def)             Requested size: 352.31625pt x 352.33014pt.
+<./../problem04/plots/fractal_plot-03_03_iter.png, id=25, 702.625pt x 702.625pt>
+File: ./../problem04/plots/fractal_plot-03_03_iter.png Graphic file (type png)
+<use ./../problem04/plots/fractal_plot-03_03_iter.png>
+Package pdftex.def Info: ./../problem04/plots/fractal_plot-03_03_iter.png  used on input line 143.
+(pdftex.def)             Requested size: 352.31625pt x 352.33014pt.
+<./../problem04/plots/fractal_plot-03_04_iter.png, id=26, 702.625pt x 702.625pt>
+File: ./../problem04/plots/fractal_plot-03_04_iter.png Graphic file (type png)
+<use ./../problem04/plots/fractal_plot-03_04_iter.png>
+Package pdftex.def Info: ./../problem04/plots/fractal_plot-03_04_iter.png  used on input line 148.
+(pdftex.def)             Requested size: 352.31625pt x 352.33014pt.
+ [3 <./../problem04/plots/fractal_plot-02_02.png>] [4 <./../problem04/plots/fractal_plot-02_03.png>] [5 <./../problem04/plots/fractal_plot-02_05_iter.png>] [6 <./../problem04/plots/fractal_plot-02_04_iter.png>] [7 <./../problem04/plots/fractal_plot-02_06_iter.png>] [8 <./../problem04/plots/fractal_plot-03_01.png>] [9 <./../problem04/plots/fractal_plot-03_02.png>] [10 <./../problem04/plots/fractal_plot-03_03_iter.png>] [11 <./../problem04/plots/fractal_plot-03_04_iter.png>] (./ANSWERS.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 11760 strings out of 475967
- 256821 string characters out of 5790009
- 1929187 words of memory out of 5000000
- 33746 multiletter control sequences out of 15000+600000
- 565537 words of font info for 61 fonts, out of 8000000 for 9000
+ 11849 strings out of 475967
+ 260711 string characters out of 5790009
+ 1934187 words of memory out of 5000000
+ 33833 multiletter control sequences out of 15000+600000
+ 567080 words of font info for 63 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 73i,5n,86p,576b,532s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on ANSWERS.pdf (1 page, 103712 bytes).
+ 73i,9n,86p,627b,532s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on ANSWERS.pdf (11 pages, 3377885 bytes).
 PDF statistics:
- 44 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
+ 91 PDF objects out of 1000 (max. 8388607)
+ 51 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

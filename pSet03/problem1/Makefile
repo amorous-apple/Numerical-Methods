@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -fopenmp
 LDFLAGS = -lm -fopenmp
 
 # Define the executable name and build directory
-EXEC = calc_fractal
+EXEC = multiply
 BUILD_DIR = build
 
 # List of source files and corresponding object files in the build directory

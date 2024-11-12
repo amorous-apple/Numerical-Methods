@@ -1,0 +1,60 @@
+\documentclass[12pt]{article}
+
+\usepackage{breqn}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,enumitem}
+\usepackage[german,spanish,english]{babel}
+\usepackage{tensor}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\newenvironment{ex}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{sol}[1][Solution]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1:}]}{\end{trivlist}}
+
+\newcommand{\meq}{\overset{!}{=}}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\brk[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+\DeclareSIUnit\angstrom{\text {Å}}
+
+%DECLARATION OF DELIMITERS%
+
+\DeclarePairedDelimiter\vb{\lvert}{\rvert}
+\DeclarePairedDelimiter\rb{(}{)}
+\DeclarePairedDelimiter\sqrb{[}{]}
+\DeclarePairedDelimiter\cb{\{}{\}}
+\DeclarePairedDelimiter\ab{\langle}{\rangle}
+\DeclarePairedDelimiter\db{\|}{\|}
+
+
+\begin{document}
+\noindent Richard Abele \hfill \today \\[30pt]
+\centerline{ \Large{ \textbf{ Numerical Methods - pSet03 }}}
+
+\section{Problem 1}
+\label{sec:prob1}
+
+A program was created to accept a command line argument that determines the size of the matrices handled in the program. The program promps the user for the values of an \texttt{n x n } matrix and a vector of dimension \texttt{n}. The program then calculates the product using the the function found in \texttt{lib/multiply.c} and it was tested using the given matrix and compared to an online calculator. The program works by iterating through the given vector and matrix by the individual components and calculating the appropriate products and sums. 
+
+To solve the second part of \texttt{problem 1}, a function was created under \texttt{lib/calc_system.c} that calculates the solution vector for a system of equations when given the matrix (in the form of an upper-triangle matrix) and the result vector. This program works by solving the values of the solution vector starting from \texttt{n} and then progressing backwards to eventually reach \texttt{1}. Solving the individual values involves first subtracting the products of the known solution values and their matching matrix elements from the result vector, and then finally dividing by the matching diagonal matrix element. The validity of this algorithm was then tested by implementing a \texttt{test_sol} function that accepts the original matrix, the solution vector, and the result vector, and compares the product of the original matrix and solution vector to the result vector, returning the total error. 
+
+We are given the system of equations
+\begin{align*}
+	x_{1} + 2 x_{2} + 3 x_{3} & =  10 &\\
+	5 x_{2} + 6 x_{3} & =  11 &\\
+	9 x_{3} & =  12 &\\
+\end{align*}
+and asked to numerically calculate the solution. The implemented algorithm yields a result of 
+\begin{align*}
+	x_{1} & =  4.80 &\\
+	x_{2} & =  0.60 &\\
+	x_{3} & =  1.33. &\\
+\end{align*}
+These results agree with the testing function and with the results obtained using an online calculator. 
+
+\end{document}

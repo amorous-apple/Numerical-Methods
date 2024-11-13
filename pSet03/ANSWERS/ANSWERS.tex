@@ -41,6 +41,24 @@
 
 A program was created to accept a command line argument that determines the size of the matrices handled in the program. The program promps the user for the values of an \texttt{n x n } matrix and a vector of dimension \texttt{n}. The program then calculates the product using the the function found in \texttt{lib/multiply.c} and it was tested using the given matrix and compared to an online calculator. The program works by iterating through the given vector and matrix by the individual components and calculating the appropriate products and sums. 
 
+To be more precise, the given vector multiplication yields the following when solved with the above function:
+
+\begin{align*}
+	\begin{pmatrix}
+		1 & 2 & 3\\
+		4 & 5 & 6\\
+		7 & 8 & 9
+	\end{pmatrix} \cdot \begin{pmatrix}
+		10\\
+		11\\
+		12
+	\end{pmatrix} & =  \begin{pmatrix}
+		68\\
+		167\\
+		266
+	\end{pmatrix}
+\end{align*}
+
 To solve the second part of \texttt{problem 1}, a function was created under \texttt{lib/calc_system.c} that calculates the solution vector for a system of equations when given the matrix (in the form of an upper-triangle matrix) and the result vector. This program works by solving the values of the solution vector starting from \texttt{n} and then progressing backwards to eventually reach \texttt{1}. Solving the individual values involves first subtracting the products of the known solution values and their matching matrix elements from the result vector, and then finally dividing by the matching diagonal matrix element. The validity of this algorithm was then tested by implementing a \texttt{test_sol} function that accepts the original matrix, the solution vector, and the result vector, and compares the product of the original matrix and solution vector to the result vector, returning the total error. 
 
 We are given the system of equations
@@ -56,5 +74,89 @@ and asked to numerically calculate the solution. The implemented algorithm yield
 	x_{3} & =  1.33. &\\
 \end{align*}
 These results agree with the testing function and with the results obtained using an online calculator. 
+
+\section{Problem 2}
+\label{sec:problem2}
+
+For \texttt{problem 2} the initial program was slightly modified and then expanded. The program was changed to use compiled values for the matrix and target vector to make testing more practical (user inputs can be enabled by uncommenting the appropriate lines). After these small alterations were made, a function called \texttt{gaussinator} was implemented to transform a given matrix and its matching result vector to row-echelon form through Gaussian elimination, printing the transformed matrix and vector, and finally solving the system of equations. 
+
+Implementation of the function is largely based on the pseudocode provided in the exercise instructions, though some special considerations had to be taken in order to prevent critical values from being overwritten before a loop was completed (notice the \texttt{temp} variables in the code). 
+
+The algorithm is based on the following simple set of instructions:
+\begin{enumerate}
+	\item Starting at the top of the matrix at \(m_{1,n}\), the row and \(b_{1}\) is divided by the value \(m_{1,1}\). 
+	\item Row one times value of \(m_{2,1}\) is then subtracted from row two (analogous with the result vector). This in turn causes \(m_2,1\) to become zero.
+	\item Steps 1 and 2 are repeated for the remaining rows, starting now at row two. This results in an upper triangle matrix that can then be solved using the program from \(problem 1\). 
+\end{enumerate}
+
+In the assignment we are given the following system of equations to solve:
+\begin{align*}
+	\begin{pmatrix}
+		2.0 & 0.1 & -0.2\\
+		0.05 & 4.2 & 0.032\\
+		0.12 & -0.07 & 5.0
+	\end{pmatrix}
+	\cdot \vec{x} & =  \begin{pmatrix}
+		10\\
+		11\\
+		12
+	\end{pmatrix}.
+\end{align*}
+
+Running the diagonalization procedure yields the following:
+\begin{align*}
+	\begin{pmatrix}
+		1.000000 & 0.500000 & -0.100000\\
+		0.000000 & 1.000000 & 0.008815\\
+		0.000000 & 0.000000 & 1.000000
+	\end{pmatrix} \cdot \vec{x} & =  \begin{pmatrix}
+		5.000000\\
+		2.561048\\
+		2.313067
+	\end{pmatrix}.
+\end{align*}
+Finally, numerically solving this system yields a solution vector of
+\begin{align*}
+	\vec{x} & =  \begin{pmatrix}
+		5.104274\\
+		2.540659\\
+		2.313067
+	\end{pmatrix}.
+\end{align*}
+This result agrees with the value calculated by an external tool and the error checking function yields an error of less than \(10^{-6}\).
+
+\section{Problem 3}
+\label{sec:problem3}
+
+Problem 3 involves finding the largest eigenvalue and its corresponding eigenvector for the following matrix
+\begin{align*}
+	\begin{pmatrix}
+		6 & 5 & -5\\
+		2 & 6 & -2\\
+		2 & 5 & -1
+	\end{pmatrix}.
+\end{align*}
+
+Finding the largest eigenvalue can be done relatively quickly using the power method. The power method involves multiplying a matrix \(M\) to the power of \(n\) by some starting vector \(\vec{b}\) and then dividing by the product of \(M\) to the power of \(n-1\) with the starting vector. In practice, one can calculate \(M^{n} \cdot \vec{b}\) by repeatedly performing a multiplication between the matrix and a vector that results from a previous iteration of this multiplication. That is to say,
+\begin{align*}
+	\vec{x}^{\rb*{n}} & =  M^{n} \cdot \vec{b}  =  M^{n-1} \cdot M \cdot \vec{b}, &\\
+\end{align*}
+where \(\vec{x}^{\rb*{n}}\) represents the \(n\)th iteration of the eigenvalue. After each iteration of the multiplication, it is advisable to normalize \(\vec{x}\) to avoid potential divergences that may occur from repeated multiplication. 
+
+Using an error of \(10^{-6}\) yields a solution of \(\approx 6\) in only eight iterations. This process if further accelerated by implementing the Aitken acceleration, a method that improves the converge of the algorithm by using information from previous iterations. The explicit form used is given by
+\begin{align*}
+	\lambda_{1} & \approx \frac{\vec{x}_{n} \vec{x}_{n+2} - \vec{x}_{n+1}^{2}}{\vec{x}_{n+2} - 2 \vec{x}_{n+1} + \vec{x}_{n}} &\\
+\end{align*}
+
+After a few iteratinos of the multiplication described above, \(\vec{x}^{\rb*{n}}\) will also be a good approximation for the eigenvector corresponding to the calculated eigenvalue. In the case of this assignment, the normalized eigenvector was found to be
+\begin{align*}
+	\lambda & =  \begin{pmatrix}
+		0.5626\\
+		0.5846\\
+		0.5846
+	\end{pmatrix}.
+\end{align*}
+
+
 
 \end{document}

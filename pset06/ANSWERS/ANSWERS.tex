@@ -1,0 +1,169 @@
+\documentclass[12pt]{article}
+
+\usepackage{breqn}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,enumitem}
+\usepackage[german,spanish,english]{babel}
+\usepackage{tensor}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\newenvironment{ex}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{sol}[1][Solution]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1:}]}{\end{trivlist}}
+
+\newcommand{\meq}{\overset{!}{=}}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\brk[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+\DeclareSIUnit\angstrom{\text {Å}}
+
+%DECLARATION OF DELIMITERS%
+
+\DeclarePairedDelimiter\vb{\lvert}{\rvert}
+\DeclarePairedDelimiter\rb{(}{)}
+\DeclarePairedDelimiter\sqrb{[}{]}
+\DeclarePairedDelimiter\cb{\{}{\}}
+\DeclarePairedDelimiter\ab{\langle}{\rangle}
+\DeclarePairedDelimiter\db{\|}{\|}
+
+
+\begin{document}
+\noindent Richard Abele \hfill \today \\[30pt]
+\centerline{ \Large{ \textbf{ Numerical Methods - Problem Set 6 }}}
+
+\begin{ex}
+    1 
+\end{ex}
+In \texttt{problem 1} we are asked to determine which formula from \texttt{table 1} in the lecture notes on numerical integration will analytically be derived from combining the Simpson \(\frac{1}{3}\) integration method with the Romberg integration method. 
+
+The five formulas in the lecture note table are as follows: 
+
+\begin{align}
+    \int_{x_{0}}^{x_{1}} {f \rb*{x}} \,d x & = \frac{h}{2} \rb*{f_{0} + f_{1}} - \frac{1}{12} h^{3} f^{\rb*{2}} \rb*{ \zeta_{1}} &\\
+    \int_{x_{0}}^{x_{2}} {f \rb*{x}} \,d x & = 
+    \frac{h}{3} \rb*{f_{0} + 4 f_{1} + f_{2}} - \frac{1}{90} h^{5} f^{\rb*{4}} \rb*{\zeta_{1}} &\\
+    \int_{x_{0}}^{x_{3}} {f \rb*{x}} \,d x & = 
+    \frac{3h}{8} \rb*{f_{0} + 3 f_{1} + 3 f_{2} + f_{3}} - \frac{3}{80} h^{5} f^{\rb*{4}} \rb*{\zeta_{1}} &\\
+    \int_{x_{0}}^{x_{4}} {f \rb*{x}} \,d x & = 
+    \frac{2h}{45} \rb*{7 f_{0} + 32 f_{1} + 12 f_{2} + 32 f_{3} + 7 f_{4}} - \frac{8 h^{7}}{945} f^{\rb*{6}} \rb*{ \zeta_{1}} &\\
+    \int_{x_{0}}^{x_{5}} {f \rb*{x}} \,d x & = 
+    \frac{5 h}{288} \rb*{19 f_{0} + 75 f_{1} + 50 f_{2} + 50 f_{3} + 75 f_{4} + 19 f^{5}} - \frac{275 h^{7}}{12096} f^{\rb*{6}} \rb*{\zeta_{1}}
+\end{align}
+
+\begin{sol} 1 \end{sol}
+
+Using \textit{Numerical Mathematics and Computing by Cheney et al.} 6th ed. and consulting Wikipedia for an equivalent relation shows that the Simpson's \(\frac{1}{3}\) rule for \(n\) subintervals is given by the form
+\begin{align*}
+    \int_{a = x_{0}}^{b = x_{n}} { f \rb*{x}} \,d x & \approx
+    \frac{h}{3} \sum_{i = 1}^{n/2} { f_{2i -2} + 4 f_{2i-1} + f_{2i}} &\\
+\end{align*}
+
+Similar to Aitken's acceleration and Richardson extrapolation, one can then use two approximations that were calculated with different intervals to calculate a more accurate approximation. 
+
+Using only two intervals yields the familiar formulation for the first order Simpson's \(\frac{1}{3}\) rule:
+\begin{align*}
+    \int_{a}^{b} {f \rb*{x}} \,d x & \approx
+    \frac{h}{3} \sum_{i = 1}^{2 / 2} {f_{2i-2} + 4 f_{2i-1} + f_{2i}} &\\
+& = \frac{h}{3} \rb*{f_{0} + 4 f_{1} + f_{2} }&\\
+\end{align*}
+
+or if we adjust the \(h \rightarrow \frac{h}{2}\) and  adjust the \(x\) values to reflect the altered interval: 
+\begin{align*}
+    \int_{x_{0}}^{x_{4}} {f \rb*{x}} \,d x & = 
+    \frac{2 h}{3} \rb*{f_{0} + 4 f_{2} + f_{4}} &\\
+\end{align*}
+
+Dividing the two intervals in half creates four subintervals, resulting in an approximation of the following form:
+\begin{align*}
+    \int_{x_{0}}^{x_{4}} {f \rb*{x}} \,d  x & = 
+    \frac{h}{3} \sum_{i = 1}^{4 / 2} {f_{2i - 2} + 4 f_{2 i -1} + f_{2i}} = 
+    \frac{h}{3} \sum_{i = 1}^{ 2} {f_{2i - 2} + 4 f_{2 i -1} + f_{2i}}  &\\
+    & = \frac{h}{3} \sqrb*{\rb*{
+            f_{0} + 4 f_{1} + f_{2}
+    } + \rb*{
+        f_{2} + 4 f_{3} + f_{4}
+}} &\\
+& = \frac{h}{3} \rb*{f_{0} + 4 f_{1} + 2 f_{2} + 4 f_{3} + f_{4}} &\\
+\end{align*}
+
+Approximations using the Romberg algorithm can then be carried out using the following formula
+
+\begin{align*}
+    R \rb*{n,m} & =  R \rb*{n, m -1 } 
+    + \frac{1}{4 ^{m} - 1} \sqrb*{R \rb*{n,m -1} - R \rb*{n - 1, m - 1}}. &\\
+\end{align*}
+
+where \(R \rb*{n,0}\) denotes the result with \(2^{n}\) subintervals. 
+
+(Note: See \textit{Numerical Mathematics and Computing by Cheney et al.} 6th ed. Pg. 205 for details)
+
+We procede by setting \(R\rb*{1,1} \) equal to Simpson's \(\frac{1}{3} \) rule, and \(R \rb*{2,1}\) equal to the Simpson's \(\frac{1}{3}\) rule with halved intervals (note than \(m = 1\) since \(m = 0 \) corresponds to the lower order integral approximation, the trapezoidal rule):
+\begin{align*}
+    R \rb*{2,2} & =  R \rb*{2,1} + \frac{1}{4^{2} -1 } \sqrb*{ R \rb*{2, 1} - R \rb*{1,1}} &\\
+    & = \frac{h}{3} \rb*{ f_{0} + 4 f_{1} + 2 f_{2} + 4 f_{3} + f_{4}}  &\\
+    & \hspace{20 pt}+ \frac{1}{15} \sqrb*{ \frac{h}{3} \rb*{ f_{0} + 4f_{1} + 2 f_{2} + 4 f_{3} + f_{4}}
+- \frac{2 h}{3} \rb*{f_{0} + 4 f_{2} + f_{4}}} &\\
+& = \frac{2 h}{45} \rb*{ 7 f_{0} + 32 f_{1} + 12 f_{2} + 32 f_{3} + 7 f_{4}} &\\
+\end{align*}
+
+The obtained formula correspond to \textbf{formula 4} in the given table. 
+
+\newpage
+
+\begin{ex}
+    2
+\end{ex}
+
+In \texttt{problem 2} we are calculate the integral
+\begin{align*}
+    f \rb*{x} & =  \frac{2^{x} \sin \rb*{x} }{x}
+\end{align*}
+using the following three numerical techniques
+\begin{enumerate}[label=(\alph*)]
+    \item Simpson's \(\frac{1}{3}\) rule
+    \item Simpson's \(\frac{1}{3}\) rule with the Romberg algorithm
+    \item Gauss-Legendre with four points (data can be taken from either table 2 in the lecture notes or from page 28)
+\end{enumerate}
+
+\begin{sol}  \end{sol}
+
+To solve this exercise a C program was created (see the folder \texttt{problem2}) with the name \texttt{integratorinator}. Executing this program with the appropriate command line arguments calculates the integral approximation using the appropriate scheme. Integrals were calculated on the interval \(x_{i} = 0.1\) to \(x_{f} = 1.1\).
+
+Results were compared to an approximation given by Mathematica, yielding 
+\begin{align*}
+    I & \approx  \!1.41891918440222 &\\
+\end{align*}
+
+\begin{enumerate}[label=(\alph*)]
+    \item Simpson's \(\frac{1}{3}\) rule used the following integration approximation:
+
+        \begin{align*}
+            \int_{x_{0}}^{x_{2}} {f \rb*{x}} \,d x & \approx
+            \frac{h}{3} \rb*{f_{0} + 4 f_{1} + f_{2}}  &\\
+        \end{align*}
+Running the program yielded
+\begin{align*}
+    I & \approx 1.418709 &\\
+\end{align*}
+which differs from the answer given by Mathematica by about \(-0.0148424239 \%\).
+
+    \item Simpson's \(\frac{1}{3}\) rule combined with the Rhomberg algorithm used the following integral approximation (see \texttt{problem 1} ).
+        \begin{align*}
+            \int_{x_{0}}^{x_{4}} {f \rb*{x}} \,d x & \approx
+            \frac{2 h }{45} \rb*{ 7 f_{0} + 32 f_{1} + 12 f_{2} + 32 f_{3} + 7 f_{4}} &\\
+        \end{align*}
+        Running the program yielded
+        \begin{align*}
+            I & \approx 1.41892 &\\
+        \end{align*}
+        which differs from Mathematica's calculated value by about \(0.0000248637 \%\).
+    \item Sample
+
+\end{enumerate} 
+
+\end{document}

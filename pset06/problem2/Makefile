@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -fopenmp -g
 LDFLAGS = -lm -fopenmp
 
 # Define the executable name and build directory
-EXEC = eigenator
+EXEC = integratorinator
 BUILD_DIR = build
 
 # List of source files and corresponding object files in the build directory

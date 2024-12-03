@@ -2,7 +2,7 @@
 
 // Declaring the given function
 double fx(double x) {
-    double value = 0;
+    double value = 1.0;
     if (x == 0) {
         return value;
     }

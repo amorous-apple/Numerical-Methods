@@ -13,6 +13,7 @@ int main(int argc, char **argv) {
     double trueVal = 1.41891918440222;
     double percentDiff = ((integral - trueVal) / trueVal) * 100;
     printf(
-        "This differs fromt the 'true value' from Mathematica by: %.10lf %%\n",
+        "This differs from the 'true value' for the interval [0.1,1.1] from "
+        "Mathematica by: %.10lf %%\n",
         percentDiff);
 }

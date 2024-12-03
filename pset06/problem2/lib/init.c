@@ -7,7 +7,7 @@ void init(int argc, char **argv) {
         printf(
             "Please provide command line arguments for different results. "
             "\n\n");
-        params.method = 'r';
+        params.method = 'g';
         params.xi = 0.1;
         params.xf = 1.1;
     } else if (argc != 4) {

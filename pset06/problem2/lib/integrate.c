@@ -2,7 +2,11 @@
 
 // Declaring the given function
 double fx(double x) {
-    double value = (pow(2.0, x) * sin(x)) / x;
+    double value = 0;
+    if (x == 0) {
+        return value;
+    }
+    value = (pow(2.0, x) * sin(x)) / x;
     return value;
 }
 
@@ -68,22 +72,19 @@ double rhomberg() {
 
 // Calculating the integral using Gauss-Legendre with 4 points
 double gauss() {
-    double integral;
-
-    // Calculating the step size
-    double intervals = (float)4;
-    double stepSize = (params.xf - params.xi) / intervals;
+    double integral = 0;
 
     // Creating an array of xValues at which to evaluate f(x)
-    int numOfVals = (int)intervals + 1;
-    double xVals[numOfVals];
-    for (int i = 0; i < numOfVals; i++) {
-        xVals[i] = params.xi + i * stepSize;
-    }
+    double xVals[4] = {-0.861136, -0.339981, 0.339981, 0.861136};
+    double AVals[4] = {0.347855, 0.652145, 0.652145, 0.347855};
 
     // Calculating the approximation
-    integral = (2 * stepSize / 45) *
-               (7 * fx(xVals[0]) + 32 * fx(xVals[1]) + 12 * fx(xVals[2]) +
-                32 * fx(xVals[3]) + 7 * fx(xVals[4]));
+    double subst1 = (params.xf - params.xi) / 2.0;
+    double subst2 = (params.xf + params.xi) / 2.0;
+    for (int i = 0; i < 4; i++) {
+        integral += AVals[i] * fx(subst1 * xVals[i] + subst2);
+    }
+    integral *= subst1;
+
     return integral;
 }

@@ -148,7 +148,7 @@ Results were compared to an approximation given by Mathematica, yielding
         \end{align*}
 Running the program yielded
 \begin{align*}
-    I & \approx 1.418709 &\\
+    I & \approx 1.418709 ,&\\
 \end{align*}
 which differs from the answer given by Mathematica by about \(-0.0148424239 \%\).
 
@@ -159,11 +159,164 @@ which differs from the answer given by Mathematica by about \(-0.0148424239 \%\)
         \end{align*}
         Running the program yielded
         \begin{align*}
-            I & \approx 1.41892 &\\
+            I & \approx 1.41892 ,&\\
         \end{align*}
         which differs from Mathematica's calculated value by about \(0.0000248637 \%\).
-    \item Sample
+    \item In order to solve this integral using Gauss-Legendre quadrature, we first consider the the form that the solution needs to take. 
+    \begin{align*}
+        \int_{c}^{d} {f \rb*{x}} \,d x & = 
+        \int_{-1}^{1} { f \rb*{x}} \,d x  \approx
+        \sum_{i = 1}^{n} {A_{i} f \rb*{x_{i}}}  &\\
+    \end{align*}
+    With \(A_{i}\) being the quadrature weights and \(x_{i}\) being the roots of the \(n\)th Legendre polynomial.
+
+    In order for us to use this approximation for an arbitrary interval \(\sqrb*{a,b}\), we use the following substitution:
+    \begin{align*}
+        \lambda \rb*{t} & = \rb*{\frac{b-a}{d-c}} t + \rb*{\frac{ad - bc}{d -c}} &\\
+        dx & = \lambda' \rb*{t} d t 
+         = \frac{b-a}{d-c} d t, &\\
+    \end{align*}
+    resulting in 
+    \begin{align*}
+        \int_{a}^{b} {f \rb*{x}} \,d x & = \int_{c}^{d} {f \rb*{ \lambda (t)} \frac{b-a}{d-c}} \,d t &\\
+        & \approx
+        \rb*{\frac{b-a}{d-c}} \sum_{i=1}^{n} {
+            A_{i} f \rb*{ \sqrb*{
+                    \frac{b-a}{d-c}
+            }t_{i} 
+        + \sqrb*{\frac{ad-bc}{d-c}}}
+        }. &\\
+    \end{align*}
+    If we then plug in \(\sqrb*{c,d} = \sqrb*{-1,1}\), we obtain the expression
+    \begin{align*}
+        \int_{a}^{b} {f \rb*{x}} \,d x & \approx
+        \frac{b-a}{2} \sum_{i = 1}^{n} {
+            A_{i} f \rb*{\sqrb*{\frac{b-a}{2}}t_{i} + \frac{a+b}{2}}
+        } &\\
+    \end{align*}
+    For our usecase of \(\sqrb*{a,b} = \sqrb*{0.1,1.1}\) that results in 
+    \begin{align*}
+        \int_{a}^{b} {f \rb*{x}} \,d x & = 
+        \int_{0.1}^{1.1} {f \rb*{x}} \,d x &\\
+         & \approx \rb*{0.5} \sum_{i = 1 }^{4} {A_{i} f \rb*{
+                 0.5 t_{i} + 0.6
+         }}
+    \end{align*}
+    From the lecture notes we know that for four points, the \(x\) values needed are given by
+    \begin{align*}
+        x_{1} & = - 0.861136 &\\
+        x_{2} & = - 0.339981 &\\
+        x_{3} & =  0.339981 &\\
+        x_{4} & =  0.861136
+    \end{align*}
+    and the \(A\) values are given by 
+    \begin{align*}
+        A_{1} & = 0.347855 &\\
+        A_{2} & = 0.652145 &\\
+        A_{3} & = 0.652145 &\\
+        A_{4} & = 0.347855 
+    \end{align*}
+    Implementing this approximation into C and running the program yields
+    \begin{align*}
+        I & \approx 1.41891 ,&\\
+    \end{align*}
+    which differs from the Mathematica-calculated value by \(0.000000180 \%\).
 
 \end{enumerate} 
+As can quite easily be seen, the accuracy of these approximations increases as one moves through the list. This is not too surprising, as the approximations use progressively more information (fist increasing the numbers of points used, and then fainlly adding weights).
+
+\newpage
+
+\begin{ex}
+    3
+\end{ex}
+
+\texttt{Problem 3} involves numerically proving the relations given by the following three two-dimensional integrals:
+\begin{align}
+    I_{1} & =  \int_{0}^{1} { \rb*{\int_{0}^{2} {x y^{2}} \,d x}} \,d y  = \frac{2}{3} &\\
+    I_{2} & =  \int_{0}^{1} {\rb*{ \int_{2y}^{2} {x y^{2}} \,d x}} \,d y  =  \frac{4}{15} &\\
+    I_{3} & = \int_{0}^{2} { \rb*{ \int_{0}^{x/2} {x y^{2}} \,d y}} \,d x  =  ? 
+\end{align}
+
+\begin{sol}  \end{sol}
+
+According to the lecture notes, if the limits of integration are constants, we can apply one of our previous integration techniques in sequence.
+
+For this exercise let \(f \rb*{x, y} = x y^{2} = f_{x,y}\).
+
+We begin by considering the general integral
+\begin{align*}
+    I & = \int_{a}^{b} { \rb*{\int_{c}^{d} {x y^{2}} \,d x}} \,d y  = 
+    \int_{a}^{b} { \rb*{\int_{c}^{d} {f_{x,y}} \,d x}} \,d y &\\
+\end{align*}
+First we calculate the approximation for the inner integral using Simpson's \(\frac{1}{3}\) rule
+\begin{align*}
+    I_{\text{in} } & =  \int_{c}^{d} {f_{x,y}} \,d x &\\
+     & \approx \frac{h_{x}}{3} \rb*{f_{0,y} + 4 f_{1,y} + f_{2,y}}, 
+\end{align*}
+where \(h_{x}  =  \frac{d- c}{2}\).
+
+Placing this approximation into the outer integral yields
+\begin{align*}
+    I & \approx  \int_{a}^{b} {\rb*{\frac{h_{x}}{3} \rb*{f_{0,y} + 4 f_{1,y} + f_{2,y}}}} \,d y &\\
+          & = \frac{h_{x}}{3} \int_{a}^{b} {\rb*{f_{0,y} + 4 f_{1,y} + f_{2,y}}} \,d y. &\\
+\end{align*}
+If we then once again apply Simpson's \(\frac{1}{3}\) rule, we obtain the following numericall approximation for the integral:
+\begin{align*}
+    I & \approx \frac{h_{x}}{3} \frac{h_{y}}{3} \sqrb*{
+        \rb*{f_{0,0} + 4 f_{1,0} + f_{2,0}} +
+        4 \rb*{f_{0,1} + f_{1,1} + f_{2,1}} + 
+        \rb*{f_{0,2} + 4 f_{1,2} + f_{2,2}}
+    } &\\
+    & = \frac{h_{x} h_{y}}{9} 
+    \sqrb*{
+        \rb*{f_{0,0} + 4 f_{1,0} + f_{2,0}} +
+        4 \rb*{f_{0,1} + f_{1,1} + f_{2,1}} + 
+        \rb*{f_{0,2} + 4 f_{1,2} + f_{2,2}}
+    }, &\\
+\end{align*}
+with \(h_{y} = \frac{b - a}{2}\).
+
+Written out fully, we get
+\begin{align*}
+    I & \approx \frac{(d-c)(b-a)}{36}
+    \sqrb*{
+        \rb*{f_{0,0} + 4 f_{1,0} + f_{2,0}} +
+        4 \rb*{f_{0,1} + f_{1,1} + f_{2,1}} + 
+        \rb*{f_{0,2} + 4 f_{1,2} + f_{2,2}}
+    }, &\\
+\end{align*}
+
+\begin{enumerate}[label=(\alph*)]
+    \item 
+Using this expression to calculate the numerical value of \(I_{1}\) yields exactly the expected result.
+
+\item 
+
+In order to calculate the value of \(I_{2}\), we go from this expression obtained during the calculation of \(I\)
+\begin{align*}
+    I_{1} & \approx  \int_{a}^{b} {\rb*{\frac{h_{x}}{3} \rb*{f_{0,y} + 4 f_{1,y} + f_{2,y}}}} \,d y . &\\
+\end{align*}
+Due to the altering of \(c\), we must change the value of \(h_{x}\) as follows:
+\begin{align*}
+    h_{x} & = \frac{d - c}{2} = \frac{d - 2 y}{2} = h_{x} \rb*{y}&\\
+\end{align*}
+
+This results in the general approximation of 
+\begin{align*}
+    I_{2} & \approx  \int_{a}^{b} {\rb*{\frac{h_{x} \rb*{y}}{3} \rb*{f_{0,y} + 4 f_{1,y} + f_{2,y}}}} \,d y  &\\
+    I_{2} & \approx \frac{h_{y}}{9} [
+        h_{x}\rb*{y_{0}} \rb*{f_{0,0} + 4 f_{1,0} + f_{2,0}} +
+        4 h_{x}\rb*{y_{1}} \rb*{f_{0,1} + f_{1,1} + f_{2,1}} &\\
+& \hspace{200 px} + 
+        h_{x}\rb*{y_{2}} \rb*{f_{0,2} + 4 f_{1,2} + f_{2,2}}
+    ] &\\
+\end{align*}
+% This thus results in 
+% \begin{align*}
+%     I_{2} & \approx  \int_{a}^{b} {\rb*{\frac{d - 2 y}{6} \rb*{f_{0,y} + 4 f_{1,y} + f_{2,y}}}} \,d y . &\\
+% \end{align*}
+
+\end{enumerate}
 
 \end{document}

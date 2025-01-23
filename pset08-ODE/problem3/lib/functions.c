@@ -5,5 +5,9 @@
 double fi_a() { return 0.1; }
 double f_a(double x, double y) { return y + x * x - 2.0 * x + sin(x); }
 
-double fi_b() { return 2.0; }
-double f_b(double x, double y) { return 0; }
+// double fi_b() { return 2.0; }
+// double f_b(double x, double y) { return 0; }
+
+double fi_test(void) { return 1.0; }
+
+double f_test(double x, double y) { return y * cos(x + y); }

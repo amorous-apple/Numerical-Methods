@@ -130,12 +130,12 @@ double **AdamsMoulton(double (*fnctPtr)(double, double), double yInitial,
     result[0][1] = yInitial;
 
     double h = (xEnd - xStart) / numSteps;
-    double xVal, xValPrev;
-    double yVal, yValPrev;
+    double xVal;
+    double yVal;
     double k1, k2, k3, k4;
 
     // Calculating the first few steps using RK4
-    int numPreSteps = 4;
+    int numPreSteps = 3;
     for (int i = 1; i <= numPreSteps; i++) {
         xVal = xStart + i * h;
         yVal = result[i - 1][1];
@@ -152,13 +152,77 @@ double **AdamsMoulton(double (*fnctPtr)(double, double), double yInitial,
     // Calculating the remaining steps with Adams-Moulton
     for (int i = numPreSteps + 1; i <= numSteps; i++) {
         xVal = xStart + i * h;
-        xValPrev = xVal - h;
         yVal = result[i - 1][1];
-        yValPrev = result[i - 2][1];
 
         result[i][0] = xVal;
-        result[i][1] = yVal + (h / 2) * (fnctPtr(xValPrev, yValPrev) +
-                                         fnctPtr(xVal, yVal));
+        result[i][1] =
+            yVal +
+            (h / 24) * (55.0 * fnctPtr(result[i - 1][0], result[i - 1][1]) -
+                        59.0 * fnctPtr(result[i - 2][0], result[i - 2][1]) +
+                        37.0 * fnctPtr(result[i - 3][0], result[i - 3][1]) -
+                        9.0 * fnctPtr(result[i - 4][0], result[i - 4][1]));
+    }
+
+    return result;
+}
+
+// Using the Adams-Moulton with predictions and corrections method to calculate
+// numSteps pairs of (x, y) for a DE given a function pointer and an initial
+// value y_0
+double **AdamsMoultonPredicted(double (*fnctPtr)(double, double),
+                               double yInitial, double xStart, double xEnd,
+                               int numSteps) {
+    double **result = malloc((numSteps + 1) * sizeof(double *));
+    double *doubleArr = malloc(2 * (numSteps + 1) * sizeof(double));
+    if (result == NULL || doubleArr == NULL) {
+        perror("Error allocating memory for result or doubleArr\n");
+    }
+    for (int i = 0; i < numSteps + 1; i++) {
+        result[i] = doubleArr + i * 2;
+    }
+    result[0][0] = xStart;
+    result[0][1] = yInitial;
+
+    double h = (xEnd - xStart) / numSteps;
+    double xVal;
+    double yVal;
+    double k1, k2, k3, k4;
+
+    // Calculating the first few steps using RK4
+    int numPreSteps = 3;
+    for (int i = 1; i <= numPreSteps; i++) {
+        xVal = xStart + i * h;
+        yVal = result[i - 1][1];
+
+        k1 = h * fnctPtr(xVal, yVal);
+        k2 = h * fnctPtr(xVal + (1.0 / 2) * h, yVal + (1.0 / 2) * k1);
+        k3 = h * fnctPtr(xVal + (1.0 / 2) * h, yVal + (1.0 / 2) * k2);
+        k4 = h * fnctPtr(xVal + h, yVal + k3);
+
+        result[i][0] = xVal;
+        result[i][1] = yVal + (1.0 / 6) * (k1 + 2.0 * k2 + 2.0 * k3 + k4);
+    }
+
+    // Calculating the remaining steps with Adams-Moulton
+    double yValPredicted;
+    for (int i = numPreSteps + 1; i <= numSteps; i++) {
+        xVal = xStart + i * h;
+        yVal = result[i - 1][1];
+
+        yValPredicted =
+            yVal +
+            (h / 24) * (55.0 * fnctPtr(result[i - 1][0], result[i - 1][1]) -
+                        59.0 * fnctPtr(result[i - 2][0], result[i - 2][1]) +
+                        37.0 * fnctPtr(result[i - 3][0], result[i - 3][1]) -
+                        9.0 * fnctPtr(result[i - 4][0], result[i - 4][1]));
+
+        result[i][0] = xVal;
+        result[i][1] =
+            yVal +
+            (h / 24) * (9.0 * fnctPtr(xVal, yValPredicted) +
+                        19.0 * fnctPtr(result[i - 1][0], result[i - 1][1]) -
+                        5.0 * fnctPtr(result[i - 2][0], result[i - 2][1]) +
+                        fnctPtr(result[i - 3][0], result[i - 3][1]));
     }
 
     return result;

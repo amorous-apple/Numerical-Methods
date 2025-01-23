@@ -11,4 +11,7 @@ double f_a(double x, double y);
 double fi_b();
 double f_b(double x, double y);
 
+double fi_test();
+double f_test(double x, double y);
+
 #endif

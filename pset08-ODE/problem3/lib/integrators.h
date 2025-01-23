@@ -14,4 +14,6 @@ double **Adams(double (*fnctPtr)(double, double), double yInitial, double xStart
               double xEnd, int numSteps);
 double **AdamsMoulton(double (*fnctPtr)(double, double), double yInitial,
                       double xStart, double xEnd, int numSteps);
+double **AdamsMoultonPredicted(double (*fnctPtr)(double, double), double yInitial,
+                      double xStart, double xEnd, int numSteps);
 #endif
